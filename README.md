@@ -11,7 +11,7 @@ In order to run these Python scripts, the following libraries and packages are n
 	* Matplotlib
 # Data and directory  
 When running these Python scripts, by default, it is expected to find two
-	folders within this one: "HADataset" and "multitask_dual". The first would contain
+	folders within this one: "HADataset" and "exp". The first would contain
 	the hearing aid speech database that can be freely downloaded from [Data Link](https://drive.google.com/file/d/1EMgPGZZm1TKtYqSxVnTQ90DsZTjjmPmx/view?usp=sharing)
 	The second folder is the working directory, where all files resulting from running the
 	provided scripts are stored.

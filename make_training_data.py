@@ -40,7 +40,7 @@ import glob
 # VARIABLE DEFINITION #
 # ------------------- #
 DDBB_PATH = './HADataset/' # Hearing aid speech database path.
-DPATH = './multitask_dual/' # Working directory.
+DPATH = './exp/' # Working directory.
 UNK_W = 0.1 # Proportion of the "unknown word" class over the total.
 SIL_W = 0 # Proportion of the "silence" class over the total.
 SRATE = 16000 # Sampling rate of 16 kHz.

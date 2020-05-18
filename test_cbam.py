@@ -47,7 +47,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 # ------------------- #
 # VARIABLE DEFINITION #
 # ------------------- #
-DPATH = './multitask_dual/'
+DPATH = './exp/'
 # ------------------- #
 
 
