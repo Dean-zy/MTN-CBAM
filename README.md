@@ -20,3 +20,7 @@ Thanks to [Lopezespejo I, Tan Z, Jensen J, et al. Keyword Spotting for Hearing A
 
 # How to run
 run.sh demonstrates the running example
+
+# Pre-trained model in paper
+The pre-trained model of "MTN-CBAM" and "MTN-CBAM-2" using "2 * 2" convolution kernel is provided in "exp".  
+You can use "test_cbam.py" to test them, the specific command reference in "run.sh"
