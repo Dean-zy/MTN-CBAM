@@ -48,8 +48,8 @@ from keras.layers.merge import add
 from keras.activations import relu, softmax, sigmoid
 from keras import optimizers
 from CBAM import cbam_block,channel_attention,spatial_attention
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
+
+
 # ------------------- #
 # VARIABLE DEFINITION #
 # ------------------- #
@@ -80,19 +80,6 @@ def res_block(n_fm, layer):
         h = BatchNormalization(center=False, scale=False)(h)
         return add([h, x])
     return f
-def res_block_c(n_fm, layer):
-    def f(x):
-        dr = int(np.power(2,np.floor(layer/3)))
-        h = Conv2D(kernel_size=3, filters=n_fm, dilation_rate=dr, strides=1, use_bias=False, padding='same')(x)
-        h = Activation(relu)(h)
-        h = BatchNormalization(center=False, scale=False)(h)
-        dr = int(np.power(2,np.floor((layer+1)/3)))
-        h = Conv2D(kernel_size=3, filters=n_fm, dilation_rate=dr, strides=1, use_bias=False, padding='same')(h)
-        h = Activation(relu)(h)
-        h = BatchNormalization(center=False, scale=False)(h)
-        x2 = cbam_block(h)
-        return add([h, x])
-    return f
 
 # Architecture definition.
 input_tensor = Input((101, 80, 1))
@@ -102,19 +89,16 @@ x = res_block(45,2)(x)
 x = res_block(45,4)(x)
 x = res_block(45,6)(x)
 x = res_block(45,8)(x)
-x1 = res_block_c(45,10)(x)
-x2 = res_block_c(45,10)(x)
-
+x1 = cbam_block(x)
+x1 = res_block(45,10)(x1)
+x2= cbam_block(x)
+x2 = res_block(45,10)(x2)
 x1 = Conv2D(kernel_size=3, filters=45, dilation_rate=16, strides=1, use_bias=False, padding='same')(x1)
 x1 = BatchNormalization(center=False, scale=False)(x1)
-x1 = cbam_block(x1)
 x1 = GlobalAveragePooling2D()(x1)
-
 x2 = Conv2D(kernel_size=3, filters=45, dilation_rate=16, strides=1, use_bias=False, padding='same')(x2)
 x2 = BatchNormalization(center=False, scale=False)(x2)
-#x2 = cbam_block(x2)
 x2 = GlobalAveragePooling2D()(x2)
-
 x1 = Dense(units=11)(x1)
 x1 = Activation(softmax, name='keyword_spotting')(x1)
 x2 = Dense(units=1)(x2)
@@ -291,6 +275,6 @@ for e in range(n_epochs-1):
 # Saving the model.
 print("Saving the model...")
 model_json = model.to_json()
-with open(DPATH + "MTN-5-I-O.json", "w") as json_file:
+with open(DPATH + "MTN-CBAM.json", "w") as json_file:
     json_file.write(model_json)
-model.save_weights(DPATH + "MTN-5-I-O.h5")
+model.save_weights(DPATH + "MTN-CBAM.h5")
