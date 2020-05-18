@@ -3,12 +3,12 @@ A multi-task net for KWS and speaker detection.
 The description of this experiment is in the paper：
 “MTN-CBAM: Multi-Task Network with Convolutional Block Attention Module for Speaker Related Small-Footprint Keyword Spotting”
 # Environment configuration
-In order to run these Python scripts, the following libraries and packages are needed:
-	* Keras
-	* Librosa
-	* Numpy
-	* Pickle
-	* Matplotlib
+In order to run these Python scripts, the following libraries and packages are needed:  
+	* Keras  
+	* Librosa  
+	* Numpy  
+	* Pickle  
+	* Matplotlib  
 # Data and directory  
 When running these Python scripts, by default, it is expected to find two
 	folders within this one: "HADataset" and "exp". The first would contain
